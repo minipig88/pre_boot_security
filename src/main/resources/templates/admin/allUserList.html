@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<a th:href="@{/logout}">Sign Out</a></td>
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+<div align="center" th:switch="${users}">
+    <h1>List All Users</h1>
+    <form action="#" th:action="@{/admin/addUser}"  method="get">
+        <input type="submit" value="Add a new user"></p>
+    </form>
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
+        <table border="1" cellpadding="5">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}" id="name"></td>
+                <td th:text="${user.roles}"></td>
+                <td><a th:href="@{/admin/edit/{id}(id=${user.id})}">Edit</a></td>
+                <td><a th:href="@{/admin/delete/{id}(id=${user.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
